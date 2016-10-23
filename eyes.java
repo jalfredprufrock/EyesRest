@@ -10,8 +10,6 @@ public class eyes{
 	 * disables user input for twenty seconds.
 	 */
 	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				EyeRest.createAndShowGUI();
@@ -34,21 +32,21 @@ public class eyes{
 	        black.getContentPane().add(label, BorderLayout.CENTER);
 	    	black.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    	black.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//Hide close button, can't close window
 	    	black.setUndecorated(true);
 	    	black.getContentPane().setBackground(Color.gray);
-	    	//create buttons to start and stop the program
 		JButton onButton = new JButton("On");
 		JButton offButton =new JButton("Off");
-		//add action listener to on button
+			//add action listener to on button
 			onButton.addActionListener(new ActionListener(){
 				ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 			        @Override
 			        public void actionPerformed( ActionEvent e ) {
 			        	//if on button is pressed, disable addtional presses
-			        	//enable off button
+			        	//and enable off button
 			        	onButton.setEnabled(false);
 				        offButton.setEnabled(true);
-			            // add Action
+			            	// add Action
 			        	Runnable blackenRunnable = new Runnable() {
 						    public void run() {
 						    	//make a new screen wide frame that is black
@@ -83,7 +81,7 @@ public class eyes{
 						}
 			        }
 			    });
-			    //add action listener to off button
+			//add action listener to off button
 			offButton.addActionListener(new ActionListener(){
 			        public void actionPerformed( ActionEvent e ) {
 			        	//if off button is clicked, disable further clicks and 
@@ -91,7 +89,7 @@ public class eyes{
 			        	onButton.setEnabled(true);
 				        offButton.setEnabled(false);
 				        stop=true;
-				        //get rid of black window 
+				        //get rid of fullscreen window 
 			        	black.dispose();
 			        }
 			    });
@@ -116,20 +114,16 @@ public class eyes{
 		//Create and set up the window.
 		JFrame frame = new JFrame("EyeRest");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		//Create and set up the content pane.
 		JComponent newContentPane = new EyeRest();
-		newContentPane.setOpaque(true); //content panes must be opaque
+		newContentPane.setOpaque(true); 
 		frame.setContentPane(newContentPane);
 		Dimension d = new Dimension(300, 90);
 		frame.setSize(d);
-		//set in middle of screen
 		frame.setLocation(500, 200);
 		//no resizing, only two buttons, don't need much space
 		frame.setResizable(false);
-		//size the frame
 		frame.pack();
-		//Display the window.
 		frame.setVisible(true);
 		}
 	}
